@@ -6,7 +6,7 @@ interface IImageItemProps {
 
 const ImageItem: React.FunctionComponent<IImageItemProps> = ({ imageUrl }) => {
   return (
-    <div className="mb-8 w-full h-full relative cursor-pointer rounded-3xl overflow-hidden group min-w-0 break-inside-avoid">
+    <div className="mb-4 sm:mb-8 w-full h-full relative cursor-pointer sm:rounded-3xl overflow-hidden group min-w-0 break-inside-avoid">
       <img
         className="w-full h-full object-cover"
         src={imageUrl}
