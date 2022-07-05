@@ -1,5 +1,5 @@
-export interface ImageItem {
-	id: string;
-	imageUrl: string;
-	label: string;
+export interface IImageItem {
+  id: string;
+  imageUrl: string;
+  label: string;
 }
