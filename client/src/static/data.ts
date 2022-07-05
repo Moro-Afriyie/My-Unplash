@@ -1,31 +1,33 @@
-export const images = [
+import { ImageItem } from '../interface/interface';
+
+export const images: ImageItem[] = [
 	{
-		id: 1,
+		id: '1',
 		imageUrl: 'https://source.unsplash.com/VWcPlbHglYc',
 		label: 'Image 1',
 	},
 	{
-		id: 2,
+		id: '2',
 		imageUrl: 'https://source.unsplash.com/e6FMMambeO4',
 		label: 'Image 2',
 	},
 	{
-		id: 3,
+		id: '3',
 		imageUrl: 'https://source.unsplash.com/klCiPmzUw0Y',
 		label: 'Image 3',
 	},
 	{
-		id: 4,
+		id: '4',
 		imageUrl: 'https://source.unsplash.com/O0N9MF--hK4',
 		label: 'Image 4',
 	},
 	{
-		id: 5,
+		id: '5',
 		imageUrl: 'https://source.unsplash.com/FV3GConVSss',
 		label: 'Image 5',
 	},
 	{
-		id: 6,
+		id: '6',
 		imageUrl: 'https://source.unsplash.com/0ESjL-Nw22Y',
 		label: 'Image 6',
 	},
