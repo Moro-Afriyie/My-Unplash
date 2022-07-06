@@ -9,6 +9,8 @@ module.exports = {
         red: "#EB5757",
         green: "#3DB46D",
         grey: "#BDBDBD",
+        modalHeader: "#333333",
+        labelColor: "#4F4F4F",
       },
       boxShadow: {
         buttonShadow: "0px 1px 6px rgba(0, 0, 0, 0.1)",
