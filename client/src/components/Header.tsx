@@ -7,7 +7,6 @@ interface IHeaderProps {}
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   return (
     <header className="flex flex-wrap gap-4 justify-between w-full items-center font-noto-sans">
-      {/* <div className="flex gap-4"> */}
       <img src={logo} alt="logo" />
       <div className="w-full sm:w-[18.75rem] overflow-hidden  rounded-lg relative flex gap-3 items-center justify-center h-[3.438rem]">
         <Icon
@@ -22,7 +21,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
           placeholder="Search by name"
         />
       </div>
-      {/* </div> */}
+
       <button className="bg-green ml-auto text-sm font-bold w-full sm:w-[8.563rem] h-[3.438rem] rounded-xl shadow-buttonShadow text-white">
         Add a photo
       </button>
