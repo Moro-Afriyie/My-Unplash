@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         overlay: "rgba(0, 0, 0, 0.38)",
+        modalBackground: "rgba(0, 0, 0, 0.25)",
         red: "#EB5757",
         green: "#3DB46D",
         grey: "#BDBDBD",
