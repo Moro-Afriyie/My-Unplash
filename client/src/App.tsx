@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "./components/Header";
 import ImageItem from "./components/ImageItem";
 import { IImageItem } from "./interface/interface";
 import { images } from "./static/data";
@@ -8,10 +9,17 @@ const data = images;
 function App() {
   return (
     <div className="App p-4 md:p-10">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <Header />
       <div className="sm:columns-2 md:columns-3 gap-8 ">
         {data.map((item: IImageItem) => {
-          return <ImageItem imageUrl={item.imageUrl} key={item.id} />;
+          return (
+            <ImageItem
+              imageUrl={item.imageUrl}
+              id={item.id}
+              label={item.label}
+              key={item.id}
+            />
+          );
         })}
       </div>
     </div>
