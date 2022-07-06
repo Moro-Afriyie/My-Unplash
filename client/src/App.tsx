@@ -8,7 +8,7 @@ const data = images;
 // eslint-disable-next-line require-jsdoc
 function App() {
   return (
-    <div className="App p-4 md:p-10">
+    <div className="App p-4 md:p-10 flex flex-col gap-8">
       <Header />
       <div className="sm:columns-2 md:columns-3 gap-8 ">
         {data.map((item: IImageItem) => {

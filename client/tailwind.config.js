@@ -6,6 +6,14 @@ module.exports = {
       colors: {
         overlay: "rgba(0, 0, 0, 0.38)",
         red: "#EB5757",
+        green: "#3DB46D",
+      },
+      boxShadow: {
+        buttonShadow: "0px 1px 6px rgba(0, 0, 0, 0.1)",
+      },
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
+        "noto-sans": ["Noto Sans", "sans-serif"],
       },
     },
   },
