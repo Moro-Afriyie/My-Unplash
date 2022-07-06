@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "@iconify/react": "^3.2.2",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",
     "autoprefixer": "^10.4.7",
