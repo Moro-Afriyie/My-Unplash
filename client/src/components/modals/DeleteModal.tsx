@@ -1,7 +1,10 @@
 import * as React from "react";
 import Input from "../shared/input";
 
-interface IDeleteModalProps {}
+interface IDeleteModalProps {
+  id: string;
+  setImageId: React.Dispatch<React.SetStateAction<string>>;
+}
 
 const DeleteModal: React.FunctionComponent<IDeleteModalProps> = (props) => {
   const [password, setPassword] = React.useState("");
@@ -29,6 +32,7 @@ const DeleteModal: React.FunctionComponent<IDeleteModalProps> = (props) => {
                 data-modal-toggle="defaultModal"
                 type="button"
                 className="text-grey border-none outline-none"
+                onClick={() => props.setImageId("")}
               >
                 Cancel
               </button>

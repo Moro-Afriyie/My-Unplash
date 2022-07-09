@@ -8,7 +8,6 @@ import { images } from "./static/data";
 const data = images;
 // eslint-disable-next-line require-jsdoc
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
   const [imageId, setImageId] = useState("");
 
   return (
@@ -22,13 +21,12 @@ function App() {
               id={item.id}
               label={item.label}
               key={item.id}
+              setImageId={setImageId}
             />
           );
         })}
       </div>
-      {isOpen && (
-        <DeleteModal setIsOpen={setIsOpen} isOpen={isOpen} id={imageId} />
-      )}
+      {imageId !== "" && <DeleteModal setImageId={setImageId} id={imageId} />}
     </div>
   );
 }
