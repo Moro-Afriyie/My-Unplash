@@ -19,6 +19,9 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({
       <div className="relative p-4 w-full max-w-2xl h-full min-h-screen flex items-center justify-center ">
         {/* <!-- Modal content --> */}
         <div className="relative  p-8 bg-white rounded-xl w-full flex flex-col gap-5 max-w-[38.75rem] min-h-[22.95rem]">
+          <p className="text-xl text-center font-medium text-green">
+            Photo added ✅
+          </p>
           <p className="text-2xl font-medium">Add a new photo</p>
           <form className="flex flex-col flex-grow gap-8 sm:justify-between">
             <Input
