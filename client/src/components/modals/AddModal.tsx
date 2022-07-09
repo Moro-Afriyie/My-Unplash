@@ -1,9 +1,13 @@
 import * as React from "react";
 import Input from "../shared/input";
 
-interface IAddModalProps {}
+interface IAddModalProps {
+  onCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const AddModal: React.FunctionComponent<IAddModalProps> = (props) => {
+const AddModal: React.FunctionComponent<IAddModalProps> = ({
+  onCloseModal,
+}) => {
   const [label, setLabel] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
 
@@ -40,6 +44,7 @@ const AddModal: React.FunctionComponent<IAddModalProps> = (props) => {
                 data-modal-toggle="defaultModal"
                 type="button"
                 className="text-grey border-none outline-none"
+                onClick={() => onCloseModal(false)}
               >
                 Cancel
               </button>

@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./components/Header";
 import ImageItem from "./components/ImageItem";
+import DeleteModal from "./components/modals/DeleteModal";
 import { IImageItem } from "./interface/interface";
 import { images } from "./static/data";
 
@@ -22,6 +23,7 @@ function App() {
           );
         })}
       </div>
+      <DeleteModal />
     </div>
   );
 }
