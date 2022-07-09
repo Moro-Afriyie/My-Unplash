@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./components/Header";
 import ImageItem from "./components/ImageItem";
 import DeleteModal from "./components/modals/DeleteModal";
@@ -8,6 +8,9 @@ import { images } from "./static/data";
 const data = images;
 // eslint-disable-next-line require-jsdoc
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [imageId, setImageId] = useState("");
+
   return (
     <div className="App p-4 md:p-10 flex flex-col gap-20">
       <Header />
@@ -23,7 +26,9 @@ function App() {
           );
         })}
       </div>
-      <DeleteModal />
+      {isOpen && (
+        <DeleteModal setIsOpen={setIsOpen} isOpen={isOpen} id={imageId} />
+      )}
     </div>
   );
 }
