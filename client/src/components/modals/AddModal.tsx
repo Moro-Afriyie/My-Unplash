@@ -56,7 +56,7 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({
                 type="submit"
                 className="text-white px-6 h-[3.438rem] rounded-xl bg-green shadow-buttonShadow "
               >
-                {loading ? <Loader /> : "Submit"}
+                {loading ? <Loader text="Uploading..." /> : "Submit"}
               </button>
             </div>
           </form>

@@ -1,6 +1,8 @@
 import * as React from "react";
 
-interface ILoaderProps {}
+interface ILoaderProps {
+  text: string;
+}
 
 const Loader: React.FunctionComponent<ILoaderProps> = (props) => {
   return (
@@ -21,7 +23,7 @@ const Loader: React.FunctionComponent<ILoaderProps> = (props) => {
           fill="currentColor"
         />
       </svg>
-      Loading...
+      {props.text}
     </div>
   );
 };

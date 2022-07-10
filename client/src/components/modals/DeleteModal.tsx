@@ -1,5 +1,6 @@
 import * as React from "react";
 import Input from "../shared/input";
+import Loader from "../shared/Loader";
 
 interface IDeleteModalProps {
   id: string;
@@ -8,6 +9,7 @@ interface IDeleteModalProps {
 
 const DeleteModal: React.FunctionComponent<IDeleteModalProps> = (props) => {
   const [password, setPassword] = React.useState("");
+  const [loading] = React.useState(false);
 
   return (
     <div
@@ -38,9 +40,9 @@ const DeleteModal: React.FunctionComponent<IDeleteModalProps> = (props) => {
               <button
                 data-modal-toggle="defaultModal"
                 type="submit"
-                className="text-white  w-[6.563rem] h-[3.438rem] rounded-xl bg-red shadow-buttonShadow "
+                className="text-white px-6 h-[3.438rem] rounded-xl bg-red shadow-buttonShadow "
               >
-                Delete
+                {loading ? <Loader text="Deleting..." /> : "Delete"}
               </button>
             </div>
           </form>
