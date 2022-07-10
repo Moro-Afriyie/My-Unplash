@@ -1,5 +1,6 @@
 import * as React from "react";
 import Input from "../shared/input";
+import Loader from "../shared/Loader";
 
 interface IAddModalProps {
   onCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -54,8 +55,9 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({
                 type="submit"
                 className="text-white w-[6.563rem] h-[3.438rem] rounded-xl bg-green shadow-buttonShadow "
               >
-                Submit
+                <Loader />
               </button>
+              {/* Submit */}
             </div>
           </form>
         </div>

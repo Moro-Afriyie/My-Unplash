@@ -26,7 +26,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
 
       <button
         onClick={() => setAddPictureModalOpen((prev) => !prev)}
-        className="bg-green ml-auto text-sm font-bold w-full sm:w-[8.563rem] h-[3.438rem] rounded-xl shadow-buttonShadow text-white"
+        className="bg-green cursor-pointer ml-auto text-sm font-bold w-full sm:w-[8.563rem] h-[3.438rem] rounded-xl shadow-buttonShadow text-white"
       >
         Add a photo
       </button>
