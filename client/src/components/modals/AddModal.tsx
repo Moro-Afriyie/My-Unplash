@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import * as React from "react";
 import Input from "../shared/input";
 import Loader from "../shared/Loader";
@@ -11,6 +12,7 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({
 }) => {
   const [label, setLabel] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   return (
     <div
@@ -20,7 +22,6 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({
       <div className="relative p-4 w-full max-w-2xl h-full min-h-screen flex items-center justify-center ">
         {/* <!-- Modal content --> */}
         <div className="relative  p-8 bg-white rounded-xl w-full flex flex-col gap-5 max-w-[38.75rem] min-h-[22.95rem]">
-          <p className="text-xl text-center font-medium text-green">✅</p>
           <p className="text-2xl font-medium">Add a new photo</p>
           <form className="flex flex-col flex-grow gap-8 sm:justify-between">
             <Input
@@ -53,11 +54,10 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({
               <button
                 data-modal-toggle="defaultModal"
                 type="submit"
-                className="text-white w-[6.563rem] h-[3.438rem] rounded-xl bg-green shadow-buttonShadow "
+                className="text-white px-6 h-[3.438rem] rounded-xl bg-green shadow-buttonShadow "
               >
-                <Loader />
+                {loading ? <Loader /> : "Submit"}
               </button>
-              {/* Submit */}
             </div>
           </form>
         </div>

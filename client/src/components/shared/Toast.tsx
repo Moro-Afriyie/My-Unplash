@@ -7,7 +7,7 @@ interface IToastProps {
 
 const Toast: React.FunctionComponent<IToastProps> = (props) => {
   return (
-    <div className="fixed z-50 top-4 w-full">
+    <div className="fixed z-50 top-4 w-[20rem]">
       {props.type === "add" ? (
         <div
           id="toast-success"
