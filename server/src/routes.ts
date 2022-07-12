@@ -1,3 +1,4 @@
+import { PhotoController } from './controller/PhotoController';
 import { UserController } from './controller/UserController';
 
 export const Routes = [
@@ -23,6 +24,30 @@ export const Routes = [
 		method: 'delete',
 		route: '/users/:id',
 		controller: UserController,
+		action: 'remove',
+	},
+	{
+		method: 'get',
+		route: '/photos',
+		controller: PhotoController,
+		action: 'all',
+	},
+	{
+		method: 'get',
+		route: '/photos/:id',
+		controller: PhotoController,
+		action: 'one',
+	},
+	{
+		method: 'post',
+		route: '/photos',
+		controller: PhotoController,
+		action: 'save',
+	},
+	{
+		method: 'delete',
+		route: '/photos/:id',
+		controller: PhotoController,
 		action: 'remove',
 	},
 ];

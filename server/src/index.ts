@@ -1,3 +1,4 @@
+import { Photo } from './entity/Photo';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { Request, Response } from 'express';
@@ -31,12 +32,12 @@ AppDataSource.initialize()
 		// start express server
 		app.listen(port);
 
-		// insert new users for test
+		// insert new photos for test
 		// await AppDataSource.manager.save(
-		// 	AppDataSource.manager.create(User, {
-		// 		firstName: 'Timber',
-		// 		lastName: 'Saw',
-		// 		age: 27,
+		// 	AppDataSource.manager.create(Photo, {
+		// 		label: 'Photo 1',
+		// 		imageUrl:
+		// 			'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
 		// 	})
 		// );
 

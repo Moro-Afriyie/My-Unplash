@@ -1,0 +1,24 @@
+import { AppDataSource } from '../data-source';
+import { Photo } from '../entity/Photo';
+import { NextFunction, Request, Response } from 'express';
+
+export class PhotoController {
+	private photoRepository = AppDataSource.getRepository(Photo);
+
+	async all(request: Request, response: Response, next: NextFunction) {
+		return this.photoRepository.find();
+	}
+
+	async one(request: Request, response: Response, next: NextFunction) {
+		return this.photoRepository.findOneBy({ id: request.params.id });
+	}
+
+	async save(request: Request, response: Response, next: NextFunction) {
+		return this.photoRepository.save(request.body);
+	}
+
+	async remove(request: Request, response: Response, next: NextFunction) {
+		let userToRemove = await this.photoRepository.findOneBy({ id: request.params.id });
+		await this.photoRepository.remove(userToRemove);
+	}
+}

@@ -1,3 +1,4 @@
+import { Photo } from './entity/Photo';
 import { User } from './entity/User';
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
@@ -13,7 +14,7 @@ export const AppDataSource = new DataSource({
 	password: process.env.DB_PASSWORD,
 	synchronize: process.env.NODE_ENV !== 'production',
 	logging: process.env.NODE_ENV === 'development',
-	entities: [User],
+	entities: [User, Photo],
 	migrations: [],
 	subscribers: [],
 });
