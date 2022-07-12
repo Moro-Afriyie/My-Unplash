@@ -3,9 +3,7 @@ import * as bodyParser from 'body-parser';
 import { Request, Response } from 'express';
 import { AppDataSource } from './data-source';
 import { Routes } from './routes';
-import { User } from './entity/User';
 
-console.log(process.env.DB_PASSWORD);
 AppDataSource.initialize()
 	.then(async () => {
 		// create express app
@@ -26,11 +24,12 @@ AppDataSource.initialize()
 			});
 		});
 
+		const port = process.env.PORT || 3000;
 		// setup express app here
 		// ...
 
 		// start express server
-		app.listen(3000);
+		app.listen(port);
 
 		// insert new users for test
 		// await AppDataSource.manager.save(
@@ -41,8 +40,6 @@ AppDataSource.initialize()
 		// 	})
 		// );
 
-		console.log(
-			'Express server has started on port 3000. Open http://localhost:3000/users to see results'
-		);
+		console.log(`My unsplash API running in ${process.env.NODE_ENV} on port ${port} 🚀🚀🚀🚀`);
 	})
 	.catch((error) => console.log(error));
