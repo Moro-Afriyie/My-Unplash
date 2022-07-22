@@ -28,8 +28,6 @@ AppDataSource.initialize()
 		});
 
 		const port = process.env.PORT || 3000;
-		// setup express app here
-		// ...
 
 		const server = new http.Server(app);
 		server.listen(port);
@@ -41,12 +39,13 @@ AppDataSource.initialize()
 		// start express server
 
 		// insert new photos for test
-		// await AppDataSource.manager.save(
-		// 	AppDataSource.manager.create(Photo, {
-		// 		label: 'Photo 1',
-		// 		imageUrl:
-		// 			'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
-		// 	})
-		// );
+		// images.forEach(async (image) => {
+		// 	await AppDataSource.manager.save(
+		// 		AppDataSource.manager.create(Photo, {
+		// 			label: image.label,
+		// 			imageUrl: image.imageUrl,
+		// 		})
+		// 	);
+		// });
 	})
 	.catch((error) => console.log(error));
