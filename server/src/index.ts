@@ -1,9 +1,11 @@
+import { images } from './fakeData';
 import { Photo } from './entity/Photo';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { Request, Response } from 'express';
 import { AppDataSource } from './data-source';
 import { Routes } from './routes';
+import * as http from 'http';
 
 AppDataSource.initialize()
 	.then(async () => {
@@ -29,8 +31,14 @@ AppDataSource.initialize()
 		// setup express app here
 		// ...
 
+		const server = new http.Server(app);
+		server.listen(port);
+
+		server.on('listening', () => {
+			console.log(`My unsplash API running in ${process.env.NODE_ENV} on port ${port} 🚀🚀🚀🚀`);
+		});
+
 		// start express server
-		app.listen(port);
 
 		// insert new photos for test
 		// await AppDataSource.manager.save(
@@ -40,7 +48,5 @@ AppDataSource.initialize()
 		// 			'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
 		// 	})
 		// );
-
-		console.log(`My unsplash API running in ${process.env.NODE_ENV} on port ${port} 🚀🚀🚀🚀`);
 	})
 	.catch((error) => console.log(error));
