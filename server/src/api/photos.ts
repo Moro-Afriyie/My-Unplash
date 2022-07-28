@@ -9,7 +9,7 @@ const photoRepository = AppDataSource.getRepository(Photo);
 router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const photos = await photoRepository.find();
-		res.status(200).json({ data: photos });
+		res.status(200).json({ success: true, data: photos });
 	} catch (error) {
 		console.log(error);
 	}
@@ -19,7 +19,7 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const photo = await photoRepository.findOneBy({ id: req.params.id });
-		res.status(200).json({ data: photo });
+		res.status(200).json({ success: true, data: photo });
 	} catch (error) {
 		console.log(error);
 	}
@@ -29,7 +29,7 @@ router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
 router.post('/', async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const photo = await photoRepository.save(req.body);
-		res.status(201).json({ data: photo });
+		res.status(201).json({ success: true, data: photo });
 	} catch (error) {
 		console.log(error);
 	}
@@ -40,7 +40,7 @@ router.delete('/:id', async (req: Request, res: Response, next: NextFunction) =>
 	try {
 		let photoToRemove = await photoRepository.findOneBy({ id: req.params.id });
 		await photoRepository.remove(photoToRemove);
-		res.status(204);
+		res.status(200).json({ success: true });
 	} catch (error) {
 		console.log(error);
 	}
