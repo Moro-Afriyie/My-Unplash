@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import axios from "axios";
 import * as React from "react";
 import Input from "../shared/input";
 import Loader from "../shared/Loader";
@@ -14,6 +15,17 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({
   const [imageUrl, setImageUrl] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    await axios.post("http://localhost:8080/photos/", {
+      label,
+      imageUrl,
+    });
+    setLoading(false);
+    onCloseModal(false);
+  };
+
   return (
     <div
       id="defaultModal"
@@ -23,7 +35,10 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({
         {/* <!-- Modal content --> */}
         <div className="relative  p-8 bg-white rounded-xl w-full flex flex-col gap-5 max-w-[38.75rem] min-h-[22.95rem]">
           <p className="text-2xl font-medium">Add a new photo</p>
-          <form className="flex flex-col flex-grow gap-8 sm:justify-between">
+          <form
+            className="flex flex-col flex-grow gap-8 sm:justify-between"
+            onSubmit={(e) => handleSubmit(e)}
+          >
             <Input
               label="Label"
               onChange={(e) => setLabel(e.target.value)}

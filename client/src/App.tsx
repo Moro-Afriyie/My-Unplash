@@ -1,15 +1,28 @@
-import React, { useState } from "react";
+/* eslint-disable no-unused-vars */
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import ImageItem from "./components/ImageItem";
 import DeleteModal from "./components/modals/DeleteModal";
 import Toast from "./components/shared/Toast";
 import { IImageItem } from "./interface/interface";
-import { images } from "./static/data";
 
-const data = images;
 // eslint-disable-next-line require-jsdoc
 function App() {
   const [imageId, setImageId] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const url = "http://localhost:8080/photos/";
+
+  const getAllPhotos = async () => {
+    const response = await axios.get(url);
+    setData(response.data.data);
+  };
+
+  useEffect(() => {
+    getAllPhotos();
+  }, []);
 
   return (
     <div className="App p-4 md:p-10 flex flex-col gap-20">

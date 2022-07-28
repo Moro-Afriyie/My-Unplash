@@ -6,7 +6,7 @@ import AddModal from "./modals/AddModal";
 interface IHeaderProps {}
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
-  const [addPictureModalOpen, setAddPictureModalOpen] = React.useState(true);
+  const [addPictureModalOpen, setAddPictureModalOpen] = React.useState(false);
   return (
     <header className="flex flex-wrap gap-4 justify-between w-full items-center font-noto-sans">
       <img src={logo} alt="logo" />
