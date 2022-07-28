@@ -46,9 +46,8 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
 		return res.status(400).json({ success: false, message: error.details[0].message });
 	}
 	try {
-		const photo = await photoRepository.save(req.body); // save the photo
+		await photoRepository.save(req.body);
 
-		// get all photos and return as the data
 		const allPhotos = await photoRepository.find({
 			order: {
 				createdAt: 'DESC',
@@ -69,7 +68,7 @@ router.delete('/:id', async (req: Request, res: Response, next: NextFunction) =>
 		}
 
 		await photoRepository.remove(photoToRemove);
-		// get all photos and return as the data
+
 		const allPhotos = await photoRepository.find({
 			order: {
 				createdAt: 'DESC',
