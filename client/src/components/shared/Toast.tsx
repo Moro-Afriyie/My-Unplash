@@ -1,8 +1,9 @@
 import { Icon } from "@iconify/react";
 import * as React from "react";
+import { ToastOptions } from "../../interface/interface";
 
 interface IToastProps {
-  type: "delete" | "error" | "add";
+  type: ToastOptions;
 }
 
 const Toast: React.FunctionComponent<IToastProps> = (props) => {

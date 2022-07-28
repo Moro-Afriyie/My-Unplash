@@ -1,15 +1,20 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import * as React from "react";
+import { ToastOptions } from "../../interface/interface";
 import Input from "../shared/input";
 import Loader from "../shared/Loader";
 
 interface IAddModalProps {
   onCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setToast: React.Dispatch<React.SetStateAction<ToastOptions>>;
+  setData: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const AddModal: React.FunctionComponent<IAddModalProps> = ({
   onCloseModal,
+  setToast,
+  setData,
 }) => {
   const [label, setLabel] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
@@ -18,12 +23,18 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    await axios.post("http://localhost:8080/photos/", {
+    const response = await axios.post("http://localhost:8080/photos/", {
       label,
       imageUrl,
     });
+    setData(response.data.data);
     setLoading(false);
     onCloseModal(false);
+    setToast(ToastOptions.ADD);
+
+    setTimeout(() => {
+      setToast(ToastOptions.CLOSE);
+    }, 3000);
   };
 
   return (
