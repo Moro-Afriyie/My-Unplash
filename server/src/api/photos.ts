@@ -46,8 +46,15 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
 		return res.status(400).json({ success: false, message: error.details[0].message });
 	}
 	try {
-		const photo = await photoRepository.save(req.body);
-		res.status(201).json({ success: true, data: photo });
+		const photo = await photoRepository.save(req.body); // save the photo
+
+		// get all photos and return as the data
+		const allPhotos = await photoRepository.find({
+			order: {
+				createdAt: 'DESC',
+			},
+		});
+		res.status(201).json({ success: true, data: allPhotos });
 	} catch (error) {
 		console.log(error);
 	}
@@ -62,7 +69,13 @@ router.delete('/:id', async (req: Request, res: Response, next: NextFunction) =>
 		}
 
 		await photoRepository.remove(photoToRemove);
-		res.status(200).json({ success: true });
+		// get all photos and return as the data
+		const allPhotos = await photoRepository.find({
+			order: {
+				createdAt: 'DESC',
+			},
+		});
+		res.status(200).json({ success: true, data: allPhotos });
 	} catch (error) {
 		console.log(error);
 	}
