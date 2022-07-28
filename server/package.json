@@ -12,13 +12,14 @@
 		"body-parser": "^1.19.1",
 		"dotenv": "^16.0.1",
 		"express": "^4.17.2",
+		"joi": "^17.6.0",
 		"mysql": "^2.14.1",
 		"mysql2": "^2.3.3",
 		"reflect-metadata": "^0.1.13",
 		"typeorm": "0.3.7"
 	},
 	"scripts": {
-		"dev": "cross-env NODE_ENV=development nodemon",
+		"dev": "cross-env NODE_ENV=development nodemon src/index.ts",
 		"start": "cross-env NODE_ENV=production ts-node src/index.ts",
 		"typeorm": "typeorm-ts-node-commonjs"
 	}

@@ -6,7 +6,9 @@ import { Request, Response } from 'express';
 import { AppDataSource } from './data-source';
 import * as http from 'http';
 import { createAPI } from './api';
+import { config as configDotenv } from 'dotenv';
 
+configDotenv();
 AppDataSource.initialize()
 	.then(async () => {
 		// create express app
