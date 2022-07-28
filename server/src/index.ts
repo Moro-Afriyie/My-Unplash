@@ -4,7 +4,6 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import { Request, Response } from 'express';
 import { AppDataSource } from './data-source';
-import { Routes } from './routes';
 import * as http from 'http';
 import { createAPI } from './api';
 
