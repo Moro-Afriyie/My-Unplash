@@ -6,6 +6,7 @@ import { Request, Response } from 'express';
 import { AppDataSource } from './data-source';
 import { Routes } from './routes';
 import * as http from 'http';
+import { createAPI } from './api';
 
 AppDataSource.initialize()
 	.then(async () => {
@@ -14,18 +15,21 @@ AppDataSource.initialize()
 		app.use(bodyParser.json());
 
 		// register express routes from defined application routes
-		Routes.forEach((route) => {
-			(app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
-				const result = new (route.controller as any)()[route.action](req, res, next);
-				if (result instanceof Promise) {
-					result.then((result) =>
-						result !== null && result !== undefined ? res.send(result) : undefined
-					);
-				} else if (result !== null && result !== undefined) {
-					res.json(result);
-				}
-			});
-		});
+		// Routes.forEach((route) => {
+		// 	(app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
+		// 		const result = new (route.controller as any)()[route.action](req, res, next);
+		// 		if (result instanceof Promise) {
+		// 			result.then((result) =>
+		// 				result !== null && result !== undefined ? res.send(result) : undefined
+		// 			);
+		// 		} else if (result !== null && result !== undefined) {
+		// 			res.json(result);
+		// 		}
+		// 	});
+		// });
+
+		// initialize api routes
+		createAPI(app);
 
 		const port = process.env.PORT || 3000;
 

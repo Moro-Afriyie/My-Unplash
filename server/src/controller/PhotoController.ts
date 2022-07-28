@@ -7,7 +7,8 @@ export class PhotoController {
 
 	// get all photos
 	async all(request: Request, response: Response, next: NextFunction) {
-		return this.photoRepository.find();
+		const photos = await this.photoRepository.find();
+		return response.status(200).json({ data: photos });
 	}
 
 	// get all photos by photo id
