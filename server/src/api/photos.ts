@@ -19,6 +19,9 @@ router.get('/', async (req: Request, res: Response, next: NextFunction) => {
 router.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const photo = await photoRepository.findOneBy({ id: req.params.id });
+		if (!photo) {
+			return res.status(404).json({ success: false, message: 'Photo not found' });
+		}
 		res.status(200).json({ success: true, data: photo });
 	} catch (error) {
 		console.log(error);
@@ -39,6 +42,10 @@ router.post('/', async (req: Request, res: Response, next: NextFunction) => {
 router.delete('/:id', async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		let photoToRemove = await photoRepository.findOneBy({ id: req.params.id });
+		if (!photoToRemove) {
+			return res.status(404).json({ success: false, message: 'Photo not found' });
+		}
+
 		await photoRepository.remove(photoToRemove);
 		res.status(200).json({ success: true });
 	} catch (error) {
