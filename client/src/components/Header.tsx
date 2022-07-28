@@ -2,11 +2,9 @@ import * as React from "react";
 import logo from "../assets/my_unsplash_logo.svg";
 import { Icon } from "@iconify/react";
 import AddModal from "./modals/AddModal";
-import { ToastOptions } from "../interface/interface";
+
 
 interface IHeaderProps {
-  setToast: React.Dispatch<React.SetStateAction<ToastOptions>>;
-  setData: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
@@ -37,8 +35,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
       {addPictureModalOpen && (
         <AddModal
           onCloseModal={setAddPictureModalOpen}
-          setToast={props.setToast}
-          setData={props.setData}
+         
         />
       )}
     </header>

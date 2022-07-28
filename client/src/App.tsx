@@ -1,36 +1,36 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Header from "./components/Header";
 import ImageItem from "./components/ImageItem";
 import DeleteModal from "./components/modals/DeleteModal";
 import Toast from "./components/shared/Toast";
 import { IImageItem, ToastOptions } from "./interface/interface";
+import { AppDispatch, RootState } from "./store";
+import { getAllPhotos } from "./store/actions";
 
 // eslint-disable-next-line require-jsdoc
 function App() {
   const [imageId, setImageId] = useState("");
-  const [data, setData] = useState([]);
-  const [toast, setToast] = useState(ToastOptions.CLOSE);
-  const [loading, setLoading] = useState(false);
 
-  const url = "http://localhost:8080/photos/";
+  const dispatch: any = useDispatch();
 
-  const getAllPhotos = async () => {
-    const response = await axios.get(url);
-    setData(response.data.data);
-  };
+  const { photos, loading, error, toast } = useSelector(
+    (state: RootState) => state
+  );
 
   useEffect(() => {
-    getAllPhotos();
+    dispatch(getAllPhotos());
   }, []);
 
   return (
     <div className="App p-4 md:p-10 flex flex-col gap-20">
-      <Header setToast={setToast} setData={setData} />
+      <Header />
       {toast !== "" && <Toast type={toast} />}
       <div className="sm:columns-2 md:columns-3 gap-8 ">
-        {data.map((item: IImageItem) => {
+        {photos.map((item: IImageItem) => {
           return (
             <ImageItem
               imageUrl={item.imageUrl}
@@ -42,14 +42,7 @@ function App() {
           );
         })}
       </div>
-      {imageId !== "" && (
-        <DeleteModal
-          setToast={setToast}
-          setImageId={setImageId}
-          id={imageId}
-          setData={setData}
-        />
-      )}
+      {imageId !== "" && <DeleteModal setImageId={setImageId} id={imageId} />}
     </div>
   );
 }

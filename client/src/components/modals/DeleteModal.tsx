@@ -1,32 +1,31 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import * as React from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { AnyAction } from "redux";
 import { ToastOptions } from "../../interface/interface";
+import { RootState } from "../../store";
+import { closeToast, deletePhoto } from "../../store/actions";
 import Input from "../shared/input";
 import Loader from "../shared/Loader";
 
 interface IDeleteModalProps {
   id: string;
   setImageId: React.Dispatch<React.SetStateAction<string>>;
-  setToast: React.Dispatch<React.SetStateAction<ToastOptions>>;
-  setData: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const DeleteModal: React.FunctionComponent<IDeleteModalProps> = (props) => {
   const [password, setPassword] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
+const dispatch:any = useDispatch()
+
+  const { loading, error } = useSelector((state: RootState) => state);
 
   const handleDelete = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-    const response = await axios.delete(
-      `http://localhost:8080/photos/${props.id}`
-    );
-    props.setData(response.data.data);
-    setLoading(false);
-
-    props.setToast(ToastOptions.DELETE);
+   dispatch(deletePhoto(props.id))
     setTimeout(() => {
-      props.setToast(ToastOptions.CLOSE);
+     dispatch(closeToast())
     }, 3000);
     props.setImageId("");
   };

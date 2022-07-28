@@ -1,39 +1,34 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import * as React from "react";
-import { ToastOptions } from "../../interface/interface";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { addPhoto, closeToast } from "../../store/actions";
 import Input from "../shared/input";
 import Loader from "../shared/Loader";
 
 interface IAddModalProps {
   onCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setToast: React.Dispatch<React.SetStateAction<ToastOptions>>;
-  setData: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const AddModal: React.FunctionComponent<IAddModalProps> = ({
   onCloseModal,
-  setToast,
-  setData,
 }) => {
   const [label, setLabel] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
+
+  const dispatch: any = useDispatch();
+
+  const { photos, loading, error, toast } = useSelector(
+    (state: RootState) => state
+  );
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
-    const response = await axios.post("http://localhost:8080/photos/", {
-      label,
-      imageUrl,
-    });
-    setData(response.data.data);
-    setLoading(false);
+    dispatch(addPhoto({ imageUrl, label }));
     onCloseModal(false);
-    setToast(ToastOptions.ADD);
-
     setTimeout(() => {
-      setToast(ToastOptions.CLOSE);
+      dispatch(closeToast());
     }, 3000);
   };
 
