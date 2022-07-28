@@ -1,19 +1,28 @@
-import { images } from './fakeData';
-import { Photo } from './entity/Photo';
 import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import { Request, Response } from 'express';
 import { AppDataSource } from './data-source';
 import * as http from 'http';
 import { createAPI } from './api';
-import { config as configDotenv } from 'dotenv';
+import helmet from 'helmet';
+import cors = require('cors');
 
-configDotenv();
 AppDataSource.initialize()
 	.then(async () => {
 		// create express app
 		const app = express();
-		app.use(bodyParser.json());
+
+		// setup security headers
+		app.use(helmet());
+
+		// setup cross-origin resource header sharing
+		app.use(
+			cors({
+				origin: '*',
+			})
+		);
+
+		// parse JSON and url-encoded bodies
+		app.use(express.urlencoded({ extended: false }));
+		app.use(express.json());
 
 		// initialize api routes
 		createAPI(app);

@@ -4,14 +4,17 @@
 	"description": "Awesome project developed with TypeORM.",
 	"type": "commonjs",
 	"devDependencies": {
+		"@types/cors": "^2.8.12",
 		"@types/node": "^16.11.10",
 		"ts-node": "10.7.0",
 		"typescript": "4.5.2"
 	},
 	"dependencies": {
 		"body-parser": "^1.19.1",
+		"cors": "^2.8.5",
 		"dotenv": "^16.0.1",
 		"express": "^4.17.2",
+		"helmet": "^5.1.1",
 		"joi": "^17.6.0",
 		"mysql": "^2.14.1",
 		"mysql2": "^2.3.3",
