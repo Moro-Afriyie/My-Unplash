@@ -49,7 +49,7 @@ function App() {
           </svg>
           <span className="sr-only">Loading...</span>
         </div>
-      ) : (
+      ) : photos.length > 0 ? (
         <div className="sm:columns-2 md:columns-3 gap-8 ">
           {photos.map((item: IImageItem) => {
             return (
@@ -62,6 +62,10 @@ function App() {
               />
             );
           })}
+        </div>
+      ) : (
+        <div className="font-bold text-center text-black text-lg">
+          No photos found
         </div>
       )}
       {imageId !== "" && <DeleteModal setImageId={setImageId} id={imageId} />}
