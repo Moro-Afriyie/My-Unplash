@@ -114,16 +114,12 @@ export const closeToast = () => {
 };
 
 export const searchForPhotos = (searchTerm: string) => {
-  let url = `http://localhost:8080/photos/`;
-
-  if (searchTerm) {
-    url = `http://localhost:8080/photos/search/${searchTerm}`;
-  }
-
   return async (dispatch: Dispatch) => {
     try {
       dispatch(photoLoadingState());
-      const response = await axios.get(url);
+      const response = await axios.get(
+        `http://localhost:8080/photos/search/filter?searchTerm=${searchTerm}`
+      );
       if (response.data.error) {
         dispatch(errorState(response.data.message));
         setTimeout(() => {
