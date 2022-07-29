@@ -6,6 +6,7 @@ import { createAPI } from './api';
 import helmet from 'helmet';
 import cors = require('cors');
 import { HttpStatusCode } from './@types';
+import handleErrors from './middlewares/error';
 
 AppDataSource.initialize()
 	.then(async () => {
@@ -40,21 +41,7 @@ AppDataSource.initialize()
 		});
 
 		// error middleware
-		app.use(
-			(
-				err: APIError,
-				_req: express.Request,
-				res: express.Response,
-				_next: express.NextFunction
-			) => {
-				res.status(err.httpCode || 500);
-				res.json({
-					date: Date.now(),
-					message: err.message,
-					error: true,
-				});
-			}
-		);
+		app.use(handleErrors);
 
 		const port = process.env.PORT || 3000;
 
