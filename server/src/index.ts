@@ -1,48 +1,9 @@
-import { APIError } from './error';
-import * as express from 'express';
 import { AppDataSource } from './data-source';
 import * as http from 'http';
-import { createAPI } from './api';
-import helmet from 'helmet';
-import cors = require('cors');
-import { HttpStatusCode } from './@types';
-import handleErrors from './middlewares/error';
+import app from './app';
 
 AppDataSource.initialize()
 	.then(async () => {
-		// create express app
-		const app = express();
-
-		// setup security headers
-		app.use(helmet());
-
-		// setup cross-origin resource header sharing
-		app.use(
-			cors({
-				origin: '*',
-			})
-		);
-
-		// parse JSON and url-encoded bodies
-		app.use(express.urlencoded({ extended: false }));
-		app.use(express.json());
-
-		// initialize api routes
-		createAPI(app);
-
-		// handle all routes which aren't part of the application
-		app.use('*', (req: express.Request, _res) => {
-			throw new APIError(
-				'NOT FOUND',
-				HttpStatusCode.NOT_FOUND,
-				true,
-				`Requested URL ${req.originalUrl} not found`
-			);
-		});
-
-		// error middleware
-		app.use(handleErrors);
-
 		const port = process.env.PORT || 3000;
 
 		const server = new http.Server(app);
