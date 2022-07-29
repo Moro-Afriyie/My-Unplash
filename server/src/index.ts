@@ -1,9 +1,11 @@
+import { APIError } from './error';
 import * as express from 'express';
 import { AppDataSource } from './data-source';
 import * as http from 'http';
 import { createAPI } from './api';
 import helmet from 'helmet';
 import cors = require('cors');
+import { HttpStatusCode } from './@types';
 
 AppDataSource.initialize()
 	.then(async () => {
@@ -26,6 +28,33 @@ AppDataSource.initialize()
 
 		// initialize api routes
 		createAPI(app);
+
+		// handle all routes which aren't part of the application
+		app.use('*', (req: express.Request, _res) => {
+			throw new APIError(
+				'NOT FOUND',
+				HttpStatusCode.NOT_FOUND,
+				true,
+				`Requested URL ${req.originalUrl} not found`
+			);
+		});
+
+		// error middleware
+		app.use(
+			(
+				err: APIError,
+				_req: express.Request,
+				res: express.Response,
+				_next: express.NextFunction
+			) => {
+				res.status(err.httpCode || 500);
+				res.json({
+					date: Date.now(),
+					message: err.message,
+					error: true,
+				});
+			}
+		);
 
 		const port = process.env.PORT || 3000;
 
