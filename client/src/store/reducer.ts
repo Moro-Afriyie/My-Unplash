@@ -89,6 +89,7 @@ export const photoReducer = (state = initialState, action: Action) => {
         loading: false,
         toast: ToastOptions.ERROR,
         toastMessage: action.payload,
+        photoLoadingState: false,
       };
     }
 

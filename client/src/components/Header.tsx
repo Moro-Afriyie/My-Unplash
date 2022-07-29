@@ -4,7 +4,8 @@ import { Icon } from "@iconify/react";
 import AddModal from "./modals/AddModal";
 import { RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleAddModal } from "../store/actions";
+import { searchForPhotos, toggleAddModal } from "../store/actions";
+import { debounce } from "lodash";
 
 interface IHeaderProps {}
 
@@ -12,6 +13,13 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   const { addModalState } = useSelector((state: RootState) => state);
 
   const dispatch: any = useDispatch();
+  const searchMethod = (value: string) => dispatch(searchForPhotos(value));
+
+  const debouncedSearch = debounce(searchMethod, 300);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedSearch(e.target.value);
+  };
 
   return (
     <header className="flex flex-wrap gap-4 justify-between w-full items-center font-noto-sans">
@@ -27,6 +35,9 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
           id="input-group-1"
           className="font-medium border-grey border pl-16 h-full flex-grow focus:ring-blue-500 focus:border-blue-500  text-grey text-sm rounded-lg  block w-full p-2.5  "
           placeholder="Search by name"
+          onChange={(e) => {
+            handleSearch(e);
+          }}
         />
       </div>
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -21,7 +20,7 @@ function App() {
   );
 
   useEffect(() => {
-    // dispatch(getAllPhotos());
+    dispatch(getAllPhotos());
   }, []);
 
   return (

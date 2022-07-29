@@ -112,3 +112,34 @@ export const closeToast = () => {
     type: actionTypes.CLOSE_TOAST,
   };
 };
+
+export const searchForPhotos = (searchTerm: string) => {
+  let url = `http://localhost:8080/photos/`;
+
+  if (searchTerm) {
+    url = `http://localhost:8080/photos/search/${searchTerm}`;
+  }
+
+  return async (dispatch: Dispatch) => {
+    try {
+      dispatch(photoLoadingState());
+      const response = await axios.get(url);
+      if (response.data.error) {
+        dispatch(errorState(response.data.message));
+        setTimeout(() => {
+          dispatch(closeToast());
+        }, 3000);
+      }
+
+      dispatch({
+        type: actionTypes.GET_ALL_PHOTOS,
+        payload: response.data.data,
+      });
+    } catch (error) {
+      dispatch(errorState("An unexpected error occurred please try again"));
+      setTimeout(() => {
+        dispatch(closeToast());
+      }, 3000);
+    }
+  };
+};
