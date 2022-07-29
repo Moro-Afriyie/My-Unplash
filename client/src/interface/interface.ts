@@ -7,7 +7,7 @@ export interface IImageItem {
 
 export enum ToastOptions {
   DELETE = "delete",
-  ADD = "add",
+  SUCCESS = "success",
   ERROR = "error",
   CLOSE = "",
 }

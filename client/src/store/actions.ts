@@ -7,17 +7,21 @@ export const getAllPhotos = () => {
     try {
       dispatch(loadingState());
       const response = await axios.get("http://localhost:8080/photos/");
+      if (response.data.error) {
+        dispatch(errorState(response.data.message));
+      }
+
       dispatch({
         type: actionTypes.GET_ALL_PHOTOS,
         payload: response.data.data,
       });
     } catch (error) {
-      dispatch(errorState());
+      dispatch(errorState("An unexpected error occurred please try again"));
     }
   };
 };
 
-export const errorState = () => {
+export const errorState = (message: string) => {
   return {
     type: actionTypes.ERROR,
   };
@@ -39,7 +43,7 @@ export const deletePhoto = (id: string) => {
         payload: response.data.data,
       });
     } catch (error) {
-      dispatch(errorState());
+      dispatch(errorState("An unexpected error occurred please try again"));
     }
   };
 };
@@ -63,7 +67,7 @@ export const addPhoto = ({
         payload: response.data.data,
       });
     } catch (error) {
-      dispatch(errorState());
+      dispatch(errorState("An unexpected error occurred please try again"));
     }
   };
 };

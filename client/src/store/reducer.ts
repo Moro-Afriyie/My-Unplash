@@ -7,6 +7,7 @@ interface InitialState {
   toast: ToastOptions;
   loading: boolean;
   error: string | null;
+  toastMessage: string;
 }
 
 const initialState: InitialState = {
@@ -14,6 +15,7 @@ const initialState: InitialState = {
   loading: false,
   error: null,
   toast: ToastOptions.CLOSE,
+  toastMessage: "",
 };
 
 type Action =
@@ -22,7 +24,7 @@ type Action =
       payload: IImageItem[];
     }
   | { type: typeof actionTypes.LOADING }
-  | { type: typeof actionTypes.ERROR }
+  | { type: typeof actionTypes.ERROR; payload: string }
   | { type: typeof actionTypes.SUCCESS }
   | { type: typeof actionTypes.ADD_PHOTO; payload: IImageItem[] }
   | { type: typeof actionTypes.DELETE_PHOTO; payload: IImageItem[] }
@@ -42,13 +44,15 @@ export const photoReducer = (state = initialState, action: Action) => {
         photos: action.payload,
         loading: false,
         toast: ToastOptions.DELETE,
+        toastMessage: "Photo deleted",
       };
     case actionTypes.ADD_PHOTO:
       return {
         ...state,
         photos: action.payload,
         loading: false,
-        toast: ToastOptions.ADD,
+        toast: ToastOptions.SUCCESS,
+        toastMessage: "Photo added",
       };
 
     case actionTypes.CLOSE_TOAST: {
@@ -66,7 +70,7 @@ export const photoReducer = (state = initialState, action: Action) => {
     case actionTypes.ERROR: {
       return {
         ...state,
-        error: "",
+        error: action.payload,
       };
     }
     default:
