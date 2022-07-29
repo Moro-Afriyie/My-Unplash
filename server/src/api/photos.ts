@@ -82,9 +82,9 @@ router.delete(
 
 // search for photos
 router.get(
-	'/search/:searchTerm',
+	'/search/filter/',
 	asyncMiddleware(async (req: Request, res: Response, next: NextFunction) => {
-		const searchTerm = req.params.searchTerm;
+		const searchTerm = req.query.searchTerm;
 		const photos = await photoRepository.find({
 			where: { label: Like(`%${searchTerm}%`) },
 			order: {
