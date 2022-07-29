@@ -22,7 +22,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   };
 
   return (
-    <header className="flex flex-wrap gap-4 justify-between w-full items-center font-noto-sans">
+    <header className="flex sticky bg-white top-0 py-2 z-10 flex-wrap gap-4 justify-between w-full items-center font-noto-sans">
       <img src={logo} alt="logo" />
       <div className="w-full sm:w-[18.75rem] overflow-hidden  rounded-lg relative flex gap-3 items-center justify-center h-[3.438rem]">
         <Icon

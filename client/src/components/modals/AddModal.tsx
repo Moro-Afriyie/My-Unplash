@@ -19,8 +19,7 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({}) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addPhoto({ imageUrl, label }));
-    // onCloseModal(false);
+    dispatch(addPhoto({ imageUrl, label: label.trim().toLowerCase() }));
     setTimeout(() => {
       dispatch(closeToast());
     }, 3000);

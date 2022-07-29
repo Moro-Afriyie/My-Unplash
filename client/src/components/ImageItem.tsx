@@ -27,7 +27,7 @@ const ImageItem: React.FunctionComponent<IImageItemProps> = ({
         >
           delete
         </button>
-        <p className="text-white text-lg font-bold">{label}</p>
+        <p className="text-white text-lg font-bold capitalize">{label}</p>
       </div>
     </div>
   );
