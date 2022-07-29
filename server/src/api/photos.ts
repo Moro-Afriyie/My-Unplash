@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import Joi = require('joi');
+import { Like } from 'typeorm';
 import { HttpStatusCode } from '../@types';
 import { AppDataSource } from '../data-source';
 import { Photo } from '../entity/Photo';
@@ -76,6 +77,21 @@ router.delete(
 			},
 		});
 		res.status(200).json({ success: true, data: allPhotos });
+	})
+);
+
+// search for photos
+router.get(
+	'/search/:searchTerm',
+	asyncMiddleware(async (req: Request, res: Response, next: NextFunction) => {
+		const searchTerm = req.params.searchTerm;
+		const photos = await photoRepository.find({
+			where: { label: Like(`%${searchTerm}%`) },
+			order: {
+				createdAt: 'DESC',
+			},
+		});
+		res.status(200).json({ success: true, data: photos });
 	})
 );
 
