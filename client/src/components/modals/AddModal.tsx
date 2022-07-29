@@ -19,14 +19,12 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({
 
   const dispatch: any = useDispatch();
 
-  const { photos, loading, error, toast } = useSelector(
-    (state: RootState) => state
-  );
+  const { photos, loading, toast } = useSelector((state: RootState) => state);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(addPhoto({ imageUrl, label }));
-    onCloseModal(false);
+    // onCloseModal(false);
     setTimeout(() => {
       dispatch(closeToast());
     }, 3000);

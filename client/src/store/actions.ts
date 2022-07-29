@@ -27,6 +27,18 @@ export const errorState = (message: string) => {
   };
 };
 
+export const toggleDeleteModal = () => {
+  return {
+    type: actionTypes.TOGGLE_DELETE_MODAL,
+  };
+};
+
+export const toggleAddModal = () => {
+  return {
+    type: actionTypes.TOGGLE_DELETE_MODAL,
+  };
+};
+
 export const loadingState = () => {
   return {
     type: actionTypes.LOADING,
@@ -42,6 +54,7 @@ export const deletePhoto = (id: string) => {
         type: actionTypes.DELETE_PHOTO,
         payload: response.data.data,
       });
+      dispatch(toggleDeleteModal());
     } catch (error) {
       dispatch(errorState("An unexpected error occurred please try again"));
     }
@@ -66,6 +79,7 @@ export const addPhoto = ({
         type: actionTypes.ADD_PHOTO,
         payload: response.data.data,
       });
+      dispatch(toggleDeleteModal());
     } catch (error) {
       dispatch(errorState("An unexpected error occurred please try again"));
     }
