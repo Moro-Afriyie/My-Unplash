@@ -5,8 +5,8 @@ import * as actionTypes from "./actions.types";
 interface InitialState {
   photos: IImageItem[];
   toast: ToastOptions;
+  photoLoading: boolean;
   loading: boolean;
-
   toastMessage: string;
   addModalState: boolean;
   deleteModalState: boolean;
@@ -15,11 +15,11 @@ interface InitialState {
 const initialState: InitialState = {
   photos: [],
   loading: false,
-
   toast: ToastOptions.CLOSE,
   toastMessage: "",
   addModalState: false,
   deleteModalState: false,
+  photoLoading: false,
 };
 
 type Action =
@@ -34,6 +34,7 @@ type Action =
   | { type: typeof actionTypes.DELETE_PHOTO; payload: IImageItem[] }
   | { type: typeof actionTypes.CLOSE_TOAST }
   | { type: typeof actionTypes.TOGGLE_DELETE_MODAL }
+  | { type: typeof actionTypes.PHOTOS_LOADING }
   | { type: typeof actionTypes.TOGGLE_ADD_MODAL };
 
 export const photoReducer = (state = initialState, action: Action) => {
@@ -43,6 +44,7 @@ export const photoReducer = (state = initialState, action: Action) => {
         ...state,
         photos: action.payload,
         loading: false,
+        photoLoading: false,
       };
     case actionTypes.DELETE_PHOTO:
       return {
@@ -75,12 +77,17 @@ export const photoReducer = (state = initialState, action: Action) => {
         loading: true,
       };
     }
+    case actionTypes.PHOTOS_LOADING: {
+      return {
+        ...state,
+        photoLoading: true,
+      };
+    }
     case actionTypes.ERROR: {
       return {
         ...state,
-
         loading: false,
-        ToastOptions: ToastOptions.ERROR,
+        toast: ToastOptions.ERROR,
         toastMessage: action.payload,
       };
     }

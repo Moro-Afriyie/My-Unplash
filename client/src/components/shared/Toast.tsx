@@ -1,8 +1,9 @@
 import { Icon } from "@iconify/react";
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastOptions } from "../../interface/interface";
 import { RootState } from "../../store";
+import { closeToast } from "../../store/actions";
 
 interface IToastProps {
   type: ToastOptions;
@@ -10,6 +11,8 @@ interface IToastProps {
 
 const Toast: React.FunctionComponent<IToastProps> = (props) => {
   const { toastMessage } = useSelector((state: RootState) => state);
+  const dispatch: any = useDispatch();
+
   return (
     <div className="fixed z-50 top-4 w-[20rem]">
       {props.type === "success" ? (
@@ -29,6 +32,7 @@ const Toast: React.FunctionComponent<IToastProps> = (props) => {
             className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 "
             data-dismiss-target="#toast-success"
             aria-label="Close"
+            onClick={() => dispatch(closeToast())}
           >
             <span className="sr-only">Close</span>
             <svg
@@ -71,6 +75,7 @@ const Toast: React.FunctionComponent<IToastProps> = (props) => {
             className="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8 "
             data-dismiss-target="#toast-danger"
             aria-label="Close"
+            onClick={() => dispatch(closeToast())}
           >
             <span className="sr-only">Close</span>
             <svg

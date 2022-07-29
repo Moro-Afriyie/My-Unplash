@@ -2,13 +2,17 @@ import * as React from "react";
 import logo from "../assets/my_unsplash_logo.svg";
 import { Icon } from "@iconify/react";
 import AddModal from "./modals/AddModal";
+import { RootState } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleAddModal } from "../store/actions";
 
-
-interface IHeaderProps {
-}
+interface IHeaderProps {}
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
-  const [addPictureModalOpen, setAddPictureModalOpen] = React.useState(false);
+  const { addModalState } = useSelector((state: RootState) => state);
+
+  const dispatch: any = useDispatch();
+
   return (
     <header className="flex flex-wrap gap-4 justify-between w-full items-center font-noto-sans">
       <img src={logo} alt="logo" />
@@ -27,17 +31,12 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
       </div>
 
       <button
-        onClick={() => setAddPictureModalOpen((prev) => !prev)}
+        onClick={() => dispatch(toggleAddModal())}
         className="bg-green cursor-pointer ml-auto text-sm font-bold w-full sm:w-[8.563rem] h-[3.438rem] rounded-xl shadow-buttonShadow text-white"
       >
         Add a photo
       </button>
-      {addPictureModalOpen && (
-        <AddModal
-          onCloseModal={setAddPictureModalOpen}
-         
-        />
-      )}
+      {addModalState && <AddModal />}
     </header>
   );
 };

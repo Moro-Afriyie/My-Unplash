@@ -1,10 +1,6 @@
-/* eslint-disable no-unused-vars */
-import axios from "axios";
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { AnyAction } from "redux";
-import { ToastOptions } from "../../interface/interface";
 import { RootState } from "../../store";
 import { closeToast, deletePhoto } from "../../store/actions";
 import Input from "../shared/input";
@@ -17,15 +13,15 @@ interface IDeleteModalProps {
 
 const DeleteModal: React.FunctionComponent<IDeleteModalProps> = (props) => {
   const [password, setPassword] = React.useState("");
-const dispatch:any = useDispatch()
+  const dispatch: any = useDispatch();
 
-  const { loading, error } = useSelector((state: RootState) => state);
+  const { loading } = useSelector((state: RootState) => state);
 
   const handleDelete = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-   dispatch(deletePhoto(props.id))
+    dispatch(deletePhoto(props.id));
     setTimeout(() => {
-     dispatch(closeToast())
+      dispatch(closeToast());
     }, 3000);
     props.setImageId("");
   };

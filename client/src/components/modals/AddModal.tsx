@@ -3,23 +3,19 @@ import axios from "axios";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { addPhoto, closeToast } from "../../store/actions";
+import { addPhoto, closeToast, toggleAddModal } from "../../store/actions";
 import Input from "../shared/input";
 import Loader from "../shared/Loader";
 
-interface IAddModalProps {
-  onCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
+interface IAddModalProps {}
 
-const AddModal: React.FunctionComponent<IAddModalProps> = ({
-  onCloseModal,
-}) => {
+const AddModal: React.FunctionComponent<IAddModalProps> = ({}) => {
   const [label, setLabel] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
 
   const dispatch: any = useDispatch();
 
-  const { photos, loading, toast } = useSelector((state: RootState) => state);
+  const { loading } = useSelector((state: RootState) => state);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -66,7 +62,7 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({
                 data-modal-toggle="defaultModal"
                 type="button"
                 className="text-grey border-none outline-none"
-                onClick={() => onCloseModal(false)}
+                onClick={() => dispatch(toggleAddModal())}
               >
                 Cancel
               </button>
