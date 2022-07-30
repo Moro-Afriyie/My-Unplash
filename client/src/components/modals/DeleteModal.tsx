@@ -2,28 +2,24 @@ import * as React from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { closeToast, deletePhoto } from "../../store/actions";
+import { closeToast, deletePhoto, setImageId } from "../../store/actions";
 import Input from "../shared/input";
 import Loader from "../shared/Loader";
 
-interface IDeleteModalProps {
-  id: string;
-  setImageId: React.Dispatch<React.SetStateAction<string>>;
-}
+interface IDeleteModalProps {}
 
 const DeleteModal: React.FunctionComponent<IDeleteModalProps> = (props) => {
   const [password, setPassword] = React.useState("");
   const dispatch: any = useDispatch();
 
-  const { loading } = useSelector((state: RootState) => state);
+  const { loading, imageId } = useSelector((state: RootState) => state);
 
   const handleDelete = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(deletePhoto(props.id));
+    dispatch(deletePhoto(imageId));
     setTimeout(() => {
       dispatch(closeToast());
     }, 3000);
-    props.setImageId("");
   };
 
   return (
@@ -51,7 +47,7 @@ const DeleteModal: React.FunctionComponent<IDeleteModalProps> = (props) => {
                 data-modal-toggle="defaultModal"
                 type="button"
                 className="text-grey border-none outline-none"
-                onClick={() => props.setImageId("")}
+                onClick={() => dispatch(setImageId(""))}
               >
                 Cancel
               </button>

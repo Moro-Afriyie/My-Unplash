@@ -34,12 +34,6 @@ export const errorState = (message: string) => {
   };
 };
 
-export const toggleDeleteModal = () => {
-  return {
-    type: actionTypes.TOGGLE_DELETE_MODAL,
-  };
-};
-
 export const toggleAddModal = () => {
   return {
     type: actionTypes.TOGGLE_ADD_MODAL,
@@ -67,7 +61,6 @@ export const deletePhoto = (id: string) => {
         type: actionTypes.DELETE_PHOTO,
         payload: response.data.data,
       });
-      dispatch(toggleDeleteModal());
     } catch (error) {
       dispatch(errorState("An unexpected error occurred please try again")),
         setTimeout(() => {
@@ -100,7 +93,6 @@ export const addPhoto = ({
         type: actionTypes.ADD_PHOTO,
         payload: response.data.data,
       });
-      dispatch(toggleDeleteModal());
     } catch (error) {
       dispatch(errorState("An unexpected error occurred please try again"));
     }
@@ -137,5 +129,12 @@ export const searchForPhotos = (searchTerm: string) => {
         dispatch(closeToast());
       }, 3000);
     }
+  };
+};
+
+export const setImageId = (id: string) => {
+  return {
+    type: actionTypes.SET_IMAGE_ID,
+    payload: id,
   };
 };

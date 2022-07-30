@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Header from "./components/Header";
@@ -11,11 +11,9 @@ import { getAllPhotos } from "./store/actions";
 
 // eslint-disable-next-line require-jsdoc
 function App() {
-  const [imageId, setImageId] = useState("");
-
   const dispatch: any = useDispatch();
 
-  const { photos, photoLoading, toast } = useSelector(
+  const { photos, photoLoading, toast, imageId } = useSelector(
     (state: RootState) => state
   );
 
@@ -58,7 +56,6 @@ function App() {
                 id={item.id}
                 label={item.label}
                 key={item.id}
-                setImageId={setImageId}
               />
             );
           })}
@@ -68,7 +65,7 @@ function App() {
           No photos found
         </div>
       )}
-      {imageId !== "" && <DeleteModal setImageId={setImageId} id={imageId} />}
+      {imageId !== "" && <DeleteModal />}
     </div>
   );
 }

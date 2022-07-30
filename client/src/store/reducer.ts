@@ -9,7 +9,7 @@ interface InitialState {
   loading: boolean;
   toastMessage: string;
   addModalState: boolean;
-  deleteModalState: boolean;
+  imageId: string;
 }
 
 const initialState: InitialState = {
@@ -18,8 +18,8 @@ const initialState: InitialState = {
   toast: ToastOptions.CLOSE,
   toastMessage: "",
   addModalState: false,
-  deleteModalState: false,
   photoLoading: false,
+  imageId: "",
 };
 
 type Action =
@@ -33,8 +33,8 @@ type Action =
   | { type: typeof actionTypes.ADD_PHOTO; payload: IImageItem[] }
   | { type: typeof actionTypes.DELETE_PHOTO; payload: IImageItem[] }
   | { type: typeof actionTypes.CLOSE_TOAST }
-  | { type: typeof actionTypes.TOGGLE_DELETE_MODAL }
   | { type: typeof actionTypes.PHOTOS_LOADING }
+  | { type: typeof actionTypes.SET_IMAGE_ID; payload: string }
   | { type: typeof actionTypes.TOGGLE_ADD_MODAL };
 
 export const photoReducer = (state = initialState, action: Action) => {
@@ -45,6 +45,7 @@ export const photoReducer = (state = initialState, action: Action) => {
         photos: action.payload,
         loading: false,
         photoLoading: false,
+        imageId: "",
       };
     case actionTypes.DELETE_PHOTO:
       return {
@@ -53,7 +54,7 @@ export const photoReducer = (state = initialState, action: Action) => {
         loading: false,
         toast: ToastOptions.DELETE,
         toastMessage: "Photo deleted",
-        deleteModalState: false,
+        imageId: "",
       };
     case actionTypes.ADD_PHOTO:
       return {
@@ -93,17 +94,16 @@ export const photoReducer = (state = initialState, action: Action) => {
       };
     }
 
-    case actionTypes.TOGGLE_DELETE_MODAL: {
-      return {
-        ...state,
-        deleteModalState: !state.deleteModalState,
-      };
-    }
-
     case actionTypes.TOGGLE_ADD_MODAL: {
       return {
         ...state,
         addModalState: !state.addModalState,
+      };
+    }
+    case actionTypes.SET_IMAGE_ID: {
+      return {
+        ...state,
+        imageId: action.payload,
       };
     }
     default:
