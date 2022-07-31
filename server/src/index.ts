@@ -12,17 +12,5 @@ AppDataSource.initialize()
 		server.on('listening', () => {
 			console.log(`My unsplash API running in ${process.env.NODE_ENV} on port ${port} 🚀🚀🚀🚀`);
 		});
-
-		// start express server
-
-		// insert new photos for test
-		// images.forEach(async (image) => {
-		// 	await AppDataSource.manager.save(
-		// 		AppDataSource.manager.create(Photo, {
-		// 			label: image.label,
-		// 			imageUrl: image.imageUrl,
-		// 		})
-		// 	);
-		// });
 	})
 	.catch((error) => console.log(error));
