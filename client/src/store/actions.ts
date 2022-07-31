@@ -1,3 +1,4 @@
+import { baseUrl } from "./../config";
 import axios from "axios";
 import * as actionTypes from "./actions.types";
 import { Dispatch } from "redux";
@@ -6,7 +7,7 @@ export const getAllPhotos = () => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(photoLoadingState());
-      const response = await axios.get("http://localhost:8080/photos/");
+      const response = await axios.get(`${baseUrl}/photos/`);
       if (response.data.error) {
         dispatch(errorState(response.data.message));
         setTimeout(() => {
@@ -50,7 +51,7 @@ export const deletePhoto = (id: string) => {
   return async (dispatch: Dispatch) => {
     try {
       dispatch(loadingState());
-      const response = await axios.delete(`http://localhost:8080/photos/${id}`);
+      const response = await axios.delete(`${baseUrl}/photos/${id}`);
       if (response.data.error) {
         dispatch(errorState(response.data.message));
         setTimeout(() => {
@@ -85,7 +86,7 @@ export const addPhoto = ({
   return async (dispatch: Dispatch) => {
     try {
       dispatch(loadingState());
-      const response = await axios.post(`http://localhost:8080/photos/`, {
+      const response = await axios.post(`${baseUrl}/photos/`, {
         label,
         imageUrl,
       });
@@ -110,7 +111,7 @@ export const searchForPhotos = (searchTerm: string) => {
     try {
       dispatch(photoLoadingState());
       const response = await axios.get(
-        `http://localhost:8080/photos/search/filter?searchTerm=${searchTerm}`
+        `${baseUrl}/photos/search/filter?searchTerm=${searchTerm}`
       );
       if (response.data.error) {
         dispatch(errorState(response.data.message));
