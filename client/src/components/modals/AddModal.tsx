@@ -12,7 +12,10 @@ interface IAddModalProps {}
 const AddModal: React.FunctionComponent<IAddModalProps> = ({}) => {
   const [label, setLabel] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
-  const [isValidUrl, setIsValidUrl] = React.useState(false);
+  const [isInValidUrl, setIsInValidUrl] = React.useState(false);
+
+  const validUrlRegex =
+    /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/gi;
 
   const dispatch: any = useDispatch();
 
@@ -20,6 +23,11 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({}) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsInValidUrl(false);
+    if (!validUrlRegex.test(imageUrl)) {
+      setIsInValidUrl(true);
+      return;
+    }
     dispatch(addPhoto({ imageUrl, label: label.trim().toLowerCase() }));
     setTimeout(() => {
       dispatch(closeToast());
@@ -53,6 +61,8 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({}) => {
               onChange={(e) => setImageUrl(e.target.value)}
               value={imageUrl}
               type="text"
+              error={isInValidUrl}
+              errorMessage={"Enter a valid photo Url"}
               placeholder={
                 "https://images.unsplash.com/photo-1584395630827-860eee694d7b?ixlib=r..."
               }

@@ -7,6 +7,8 @@ interface IInputProps {
   type: string;
   placeholder?: string;
   name: string;
+  error?: boolean;
+  errorMessage?: string;
 }
 
 const Input: React.FunctionComponent<IInputProps> = (props) => {
@@ -22,10 +24,15 @@ const Input: React.FunctionComponent<IInputProps> = (props) => {
         type={props.type}
         name={props.name}
         onChange={props.onChange}
-        className="bg-white border px-4  border-labelColor drop-shadow-inputShadow text-sm h-[3.438rem] rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-grey"
+        className={`bg-white border px-4  ${
+          props.error ? "border-red" : "border-labelColor"
+        } drop-shadow-inputShadow text-sm h-[3.438rem] rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-grey`}
         placeholder={props.placeholder}
         required
       />
+      {props.error && (
+        <p className="text-red text-sm my-2">{props.errorMessage}</p>
+      )}
     </div>
   );
 };
