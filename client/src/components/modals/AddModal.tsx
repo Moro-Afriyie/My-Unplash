@@ -12,6 +12,7 @@ interface IAddModalProps {}
 const AddModal: React.FunctionComponent<IAddModalProps> = ({}) => {
   const [label, setLabel] = React.useState("");
   const [imageUrl, setImageUrl] = React.useState("");
+  const [isValidUrl, setIsValidUrl] = React.useState(false);
 
   const dispatch: any = useDispatch();
 
@@ -46,6 +47,7 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({}) => {
               placeholder={"Suspendisse elit massa"}
               name={"label"}
             />
+
             <Input
               label="Photo URL"
               onChange={(e) => setImageUrl(e.target.value)}
@@ -56,6 +58,7 @@ const AddModal: React.FunctionComponent<IAddModalProps> = ({}) => {
               }
               name={"photoUrl"}
             />
+
             <div className="flex items-center gap-8 justify-end ">
               <button
                 data-modal-toggle="defaultModal"
