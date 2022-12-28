@@ -24,7 +24,7 @@
 		"typeorm": "0.3.7"
 	},
 	"scripts": {
-		"build": "tsc --project ./tsconfig.json",
+		"build": "npx tsc --project ./tsconfig.json",
 		"dev": "cross-env NODE_ENV=development nodemon src/index.ts",
 		"start": "npm run build && node build/index.js",
 		"typeorm": "typeorm-ts-node-commonjs"
