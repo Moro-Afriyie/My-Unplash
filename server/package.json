@@ -27,6 +27,7 @@
 		"build": "tsc --project ./tsconfig.json",
 		"dev": "cross-env NODE_ENV=development nodemon src/index.ts",
 		"start": "npm run build && node build/index.js",
+		"startRender": "node build/index.js",
 		"typeorm": "typeorm-ts-node-commonjs"
 	}
 }
